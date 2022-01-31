@@ -16,7 +16,6 @@ Add the necessary permission on the file:
 chmod +x ivdeb
 ```
 And that's it, now and just use it.
- #
 ## How to use this script?
 To install .deb:
 ```
