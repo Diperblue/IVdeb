@@ -34,16 +34,6 @@ cd temp
 echo "Unpacking deb file"
 ar x $1
 
-
-#if [ $? != 0 ]
-#then
-#  echo "An error has occured, the file $1 may be corrupt."
-#  mv $1 .. > /dev/null
-#  cd ..
-#  sudo rm -rf temp/
- # exit 1
-#fi
-
 mv $1 .. #Movendo deb original para fora da pasta temp.
 
 echo "Unpacking control.tar.xz"
@@ -73,20 +63,17 @@ then
 fi
 
 echo "Depends $requires_package"
-#if [ -z $2 ]
-#then 
-#  read -p "Want to install .deb?[Y/n]" cn </dev/tty
-#  if [ $cn == "n" ] | [ $cn == "N" ]
-#  then
-#    echo "Ok bye bye"
-#    exit 0
-#  fi
-#fi
+read -p "Are you sure you want to continue?[Y/n]" esc
+if [ "$esc" = "n" ] || [ "$esc" = "N" ] ; then
+  echo "OK bye bye"
+  echo 0
+fi
 
 # Copiando todo o diretorio de data.tar.xz para o /, o que termina o processo do instalação.
 echo "Installing $name_package"
 sudo cp -R ./* /
 
-# Apagando /temp
+# Apagando /temp, é log_file.log
 cd ..
 sudo rm -rf ./temp
+sudo rm ./log_file.log
